@@ -1,0 +1,161 @@
+/* Page container */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Middle section to center form */
+.form-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 40px 20px;
+}
+
+/* Login box */
+.login-box {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.login-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #999;
+}
+
+.login-input {
+  width: 100%;
+  padding: 16px 18px 16px 42px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  outline: none;
+  font-size: 14px;
+}
+
+.login-input:focus {
+  border-color: #b0cc08;
+}
+
+.login-forgot {
+  text-align: left;
+  margin-left: 8px;
+  margin-top: 10px;
+}
+
+.login-forgot .link {
+  color: #000;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.submit-button {
+  background: #C2E009;
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.submit-button:hover {
+  opacity: 0.9;
+}
+
+.login-register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.login-register span {
+  font-size: 13px;
+  color: #555;
+}
+
+.login-register .register-link {
+  color: #C2E009;
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.divider {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background: #e0e0e0;
+  margin: 25px 0;
+}
+
+.divider span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid #e0e0e0;
+  border-radius: 50px;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 0;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.social-btn .icon {
+  font-size: 24px;
+}

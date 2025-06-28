@@ -1,0 +1,29 @@
+.topbar {
+  height: 60px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.search-input {
+  width: 250px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.topbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.page-content {
+  flex: 1;
+  padding: 20px;
+  background: #f0f2f5;
+  overflow-y: auto;
+}

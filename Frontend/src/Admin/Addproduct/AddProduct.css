@@ -1,0 +1,257 @@
+.add-product-page {
+  padding: 24px;
+  background: #f7f9fc;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 28px;
+}
+
+.field span {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.field b {
+  color: #d00;
+}
+
+.field input[type="text"],
+.field input[type="date"],
+.field input[type="number"],
+.field textarea,
+.field select {
+  border: 1px solid #e2e5ed;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #fff;
+  width: 100%;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: #3b5de7;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 140px;
+  width: 100%;
+}
+
+.field small {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+.row.two-cols {
+  display: flex;
+  gap: 24px;
+}
+
+.row.two-cols .field {
+  flex: 1;
+}
+
+/* ✅ Upload image section properly restored */
+.upload-field .upload-grid {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.thumb {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumb .remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.upload-thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 140px;
+  border: 2px dashed #e2e5ed;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #3b5de7;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.upload-thumb input {
+  display: none;
+}
+
+.upload-thumb svg {
+  margin-bottom: 4px;
+}
+
+.upload-thumb small {
+  margin-top: 4px;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 8px;
+}
+
+/* Sizes */
+.size-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.size-btn {
+  padding: 6px 12px;
+  border: 1px solid #e2e5ed;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.size-btn:hover {
+  border-color: #3b5de7;
+}
+
+.size-btn.active {
+  background: #3b5de7;
+  color: #fff;
+  border-color: #3b5de7;
+}
+
+/* Color tags */
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.color-btn {
+  padding: 6px 12px;
+  background: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+/* Color input */
+.color-input-box {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 100%;
+}
+
+/* Footer buttons */
+.footer-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.footer-buttons .btn {
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn.primary {
+  background: #3b5de7;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background: #344ecc;
+}
+
+.btn.outline {
+  background: #fff;
+  color: #3b5de7;
+  border-color: #3b5de7;
+}
+
+.btn.outline:hover {
+  background: #eef3fe;
+}
+
+.btn.schedule {
+  background: #f3f4f6;
+  color: #333;
+}
+
+.extended-height {
+  min-height: 120vh;
+}

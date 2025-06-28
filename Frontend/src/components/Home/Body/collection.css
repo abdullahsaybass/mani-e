@@ -1,0 +1,56 @@
+.collections-section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+/* Header */
+.cs-header { text-align: center; margin-bottom: 40px; }
+.cs-small { font-size: 12px; letter-spacing: 2px; color: #666; margin: 0; }
+.cs-title { font-size: 36px; font-weight: 800; color: #333; margin: 10px 0 5px; }
+.cs-underline { width: 50px; height: 2px; background: #dbad4d; margin: 0 auto; }
+
+/* Cards */
+.col-card { padding: 0 10px; box-sizing: border-box; }
+.col-card-large {
+  height: 450px; border-radius: 12px; overflow: hidden; position: relative;
+}
+.large-content {
+  background-size: cover; background-position: center; width: 100%; height: 100%;
+}
+.overlay {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4); color: #fff;
+  display: flex; flex-direction: column; justify-content: center; padding: 20px;
+}
+.subtext { font-size: 14px; margin: 0 0 10px; }
+.large-title { font-size: 28px; font-weight: 800; margin: 0 0 10px; }
+.highlight { color: #dbad4d; }
+.large-desc { font-size: 14px; margin-bottom: 20px; }
+.btn-outline {
+  padding: 10px 20px; border: 2px solid #fff;
+  background: transparent; color: #fff; border-radius: 20px;
+}
+
+/* Small cards */
+.col-card-small { text-align: center; padding-top: 20px; }
+.col-card-small img { max-width: 100%; height: auto; margin-bottom: 15px; }
+.small-title { font-size: 18px; font-weight: 700; color: #333; margin: 0 0 8px; }
+.small-desc { font-size: 14px; color: #777; margin: 0 0 8px; }
+.small-price { font-size: 16px; font-weight: 600; color: #333; margin: 0 0 12px; }
+.btn {
+  padding: 10px 20px; background: #dbad4d; color: #fff;
+  border: none; border-radius: 20px;
+}
+
+/* Dots */
+.coll-dots ul {
+  display: flex !important; justify-content: center; padding: 10px 0;
+  margin: 0; list-style: none;
+}
+.coll-dots li { margin: 0 5px; }
+.coll-dots button {
+  width: 10px; height: 10px; border-radius: 50%; background: #ccc; border: none;
+}
+.coll-dots .slick-active button { background: #dbad4d; }

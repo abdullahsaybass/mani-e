@@ -1,0 +1,16 @@
+.admin-panel {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: white;
+  border-right: 1px solid #eee;
+}
+
+.admin-main-content {
+  flex: 1;
+  background: #f8f9fc;
+  padding: 24px;
+}

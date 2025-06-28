@@ -1,0 +1,117 @@
+/* ---------- root ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap");
+
+:root{
+  --brand: #b0842b;
+  --accent:#ff6860;
+  --text:#333;
+  --sub:#666;
+  --border:#e0e0e0;
+  --radius:4px;
+  --shadow:0 2px 6px rgba(0,0,0,.08);
+  --bg:#fafafa;
+  --max-width:1300px;
+  font-family:Inter,sans-serif;
+}
+
+/* ---------- layout ---------- */
+.pd-card{
+  max-width:var(--max-width);
+  margin:40px auto;
+  padding:0 20px;
+  display:grid;
+  gap:48px;
+  grid-template-columns:1fr 1fr;
+}
+
+@media(max-width:900px){
+  .pd-card{grid-template-columns:1fr;}
+}
+
+/* ---------- gallery ---------- */
+.pd-left{max-width:560px}
+.pd-hero{
+  width:100%;border-radius:var(--radius);box-shadow:var(--shadow);object-fit:cover
+}
+.pd-thumbs{display:flex;gap:12px;margin-top:16px}
+.pd-thumb{
+  width:68px;height:84px;object-fit:cover;border-radius:var(--radius);
+  cursor:pointer;transition:.2s transform
+}
+.pd-thumb:hover{transform:translateY(-3px)}
+
+/* ---------- details ---------- */
+.pd-right{max-width:450px}
+.pd-collection{
+  font-family:Playfair Display,serif;font-size:22px;color:var(--brand);margin:0
+}
+.pd-title{
+  font-size:34px;margin:6px 0 14px;font-weight:700;color:var(--text)
+}
+.pd-rating{font-size:15px;color:var(--accent);margin-bottom:10px}
+.pd-rating span{color:var(--sub)}
+.pd-price{font-size:28px;font-weight:600;margin:0 0 14px}
+.pd-meta{list-style:none;padding:0;margin:0 0 20px;color:var(--sub)}
+.pd-stock{color:#28a745}
+.pd-desc{line-height:1.55;margin-bottom:28px;color:var(--text)}
+
+/* ---------- form controls ---------- */
+.pd-label{display:block;font-weight:600;margin-bottom:6px}
+.pd-select{
+  width:160px;padding:8px;border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:22px
+}
+
+/* swatches */
+.pd-swatches{display:flex;gap:12px;margin-bottom:24px}
+.pd-swatch{
+  width:28px;height:28px;border-radius:50%;border:2px solid transparent;
+  cursor:pointer;transition:.2s box-shadow
+}
+.pd-swatch.active{
+  border-color:var(--brand);box-shadow:0 0 0 3px rgba(176,132,43,.25)
+}
+
+/* quantity */
+.pd-qty{
+  display:flex;align-items:center;margin-bottom:30px;width:max-content
+}
+.pd-qty button{
+  width:34px;height:40px;border:1px solid var(--border);background:#fff;cursor:pointer
+}
+.pd-qty input{
+  width:60px;height:40px;text-align:center;border:1px solid var(--border);border-inline:none
+}
+
+/* actions */
+.pd-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:24px}
+.pd-btn{
+  padding:12px 28px;font-size:15px;border-radius:var(--radius);cursor:pointer;transition:.2s all
+}
+.pd-btn.primary{background:var(--brand);color:#fff;border:none}
+.pd-btn.primary:hover{background:#a37421}
+.pd-btn.ghost{background:#fff;color:var(--brand);border:2px solid var(--brand)}
+.pd-btn.ghost:hover{background:var(--brand);color:#fff}
+
+/* share */
+.pd-share{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--sub)}
+.pd-share i{
+  cursor:pointer;width:32px;height:32px;border-radius:50%;background:#eee;
+  display:flex;align-items:center;justify-content:center;transition:.2s background
+}
+.pd-share i:hover{background:#ddd}
+
+/* ---------- upsell ---------- */
+.pd-upsell{max-width:var(--max-width);margin:0 auto 60px;padding:0 20px}
+.pd-upsell h3{font-size:26px;margin-bottom:22px}
+.pd-upsell-wrap{display:flex;gap:26px;flex-wrap:wrap}
+.pd-upsell-card{
+  width:220px;background:var(--bg);border-radius:10px;padding:16px;
+  box-shadow:0 2px 6px rgba(0,0,0,.05);text-decoration:none;color:inherit
+}
+.pd-upsell-card img{width:100%;border-radius:8px;margin-bottom:10px}
+.pd-upsell-card h4{font-size:16px;margin:4px 0 6px}
+.pd-upsell-card p{font-size:15px;color:#b12704;margin:0}
+
+/* ---------- util ---------- */
+button:disabled{opacity:.35;cursor:not-allowed}

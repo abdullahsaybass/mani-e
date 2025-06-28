@@ -1,0 +1,62 @@
+.categories-section {
+  padding: 60px 20px;
+  background: #fff;
+  max-width: 85%;
+  margin: 0 auto;
+}
+
+.cs-header { text-align: center; margin-bottom: 40px; }
+.cs-small { font-size: 12px; letter-spacing: 2px; color: #666; margin: 0; }
+.cs-title { font-size: 36px; font-weight: 800; color: #333; margin: 10px 0 5px; }
+.cs-underline {
+  width: 50px; height: 2px;
+  background: #dbad4d;
+  margin: 0 auto;
+}
+
+.cs-tabs {
+  display: flex; justify-content: center; align-items: center;
+  gap: 30px; margin-bottom: 40px; flex-wrap: wrap;
+}
+.cs-tab {
+  background: transparent; border: none;
+  font-size: 14px; color: #555;
+  padding: 8px 16px; position: relative; cursor: pointer;
+}
+.cs-tab.active {
+  background: #dbad4d; color: #fff; border-radius: 20px;
+}
+.cs-tab:not(.active)::after {
+  content: ''; position: absolute;
+  right: -15px; top: 50%; transform: translateY(-50%);
+  width: 1px; height: 20px; background: #e0e0e0;
+}
+.cs-tab:last-child:not(.active)::after { display: none; }
+
+.cs-carousel { position: relative; }
+.arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.9); border: none;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 1;
+}
+.prev-arrow { left: -20px; }
+.next-arrow { right: -20px; }
+.arrow span { font-size: 18px; color: #333; }
+
+.cs-card {
+  padding: 20px; text-align: center; position: relative;
+}
+.cs-badge {
+  position: absolute; top: 10px; left: 10px;
+  background: #dbad4d; color: #fff;
+  padding: 4px 8px; font-size: 10px; border-radius: 12px;
+}
+.cs-image {
+  width: auto; max-height: 250px; margin: 0 auto 20px;
+}
+.cs-label { font-size: 12px; letter-spacing: 1px; color: #dbad4d; margin-bottom: 8px; }
+.cs-item-title { font-size: 18px; font-weight: 700; color: #333; margin-bottom: 10px; }
+.cs-desc { font-size: 14px; color: #777; margin-bottom: 15px; }
+.cs-price { font-size: 16px; font-weight: 600; color: #333; }

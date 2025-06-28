@@ -1,0 +1,180 @@
+.saree-showcase {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+.saree-card {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.saree-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.saree-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 1;
+}
+
+.saree-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 700px;
+  
+  
+}
+
+.saree-subtitle {
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.saree-title {
+  font-size: 34px;
+  font-weight: 800;
+  margin: 0 0 10px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.saree-divider {
+  width: 30px;
+  height: 2px;
+  background-color: #d4af37;
+  margin: 12px 0;
+}
+
+.saree-description {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #eee;
+}
+
+.saree-button {
+  background-color: #fff;
+  color: #000;
+  padding: 12px 24px;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.saree-button:hover {
+  background-color: #d4af37;
+  color: white;
+}
+/* Base styles already defined above... */
+
+@media (max-width: 1024px) {
+  .saree-showcase {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .saree-card {
+    width: 100%;
+    height: 400px;
+  }
+
+  .saree-content {
+    padding: 1rem;
+    max-width: 90%;
+    /* text-align: center; */
+  }
+
+  .saree-title {
+    font-size: 22px;
+  }
+
+  .saree-description {
+    font-size: 13px;
+  }
+
+  .saree-button {
+    padding: 10px 20px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .saree-card {
+    height: 350px;
+  }
+
+  .saree-content {
+    padding: 1rem;
+    max-width: 95%;
+  }
+
+  .saree-subtitle {
+    font-size: 11px;
+  }
+
+  .saree-title {
+    font-size: 20px;
+  }
+
+  .saree-description {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+
+  .saree-button {
+    padding: 10px 18px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .saree-card {
+    height: 300px;
+  }
+
+  .saree-content {
+  padding: 1rem;
+  max-width: 95%;
+  justify-content: none;
+  text-align: left; /* ensure left-alignment here too */
+}
+
+
+  .saree-subtitle {
+    font-size: 10px;
+  }
+
+  .saree-title {
+    font-size: 18px;
+  }
+
+  .saree-description {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .saree-button {
+    padding: 8px 16px;
+    font-size: 10px;
+  }
+}

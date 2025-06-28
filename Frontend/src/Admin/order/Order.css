@@ -1,0 +1,176 @@
+.order-list-page {
+  
+  padding: 24px;
+  background: #f7f9fc;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.order-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 280px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 1.1rem;
+}
+
+.search-wrapper input {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid #e2e5ed;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-wrapper input:focus {
+  border-color: #3b5de7;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.export-btn {
+  background: #fff;
+  color: #3b5de7;
+  border: 1px solid #3b5de7;
+}
+
+.export-btn:hover {
+  background: #eef3fe;
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.order-table th,
+.order-table td {
+  padding: 16px;
+  text-align: left;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.order-table thead {
+  background: #f3f4f6;
+}
+
+.order-table th {
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.order-table tbody tr:nth-child(odd) {
+  background: #fff;
+}
+
+.order-table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.prod-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prod-cell img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  min-width: 70px;
+}
+
+.status-pill.success {
+  background: #d1fae5;
+  color: #10b981;
+}
+
+.status-pill.pending {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.status-pill.cancel {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.tracking-btn {
+  background: #eef3fe;
+  color: #3b5de7;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tracking-btn:hover {
+  background: #deebfe;
+}
+
+.action-cell {
+  display: flex;
+  gap: 12px;
+}
+
+.action-icon {
+  font-size: 1.2rem;
+  color: #3b5de7;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.action-icon:hover {
+  color: #1e40af;
+}

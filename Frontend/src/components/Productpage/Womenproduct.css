@@ -1,0 +1,329 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #3b240f url('https://via.placeholder.com/1600x400?text=Silk+Sarees+Banner') no-repeat center/cover;
+  color: white;
+  height: 300px;
+  padding: 0 60px;
+  position: relative;
+}
+
+.banner-text {
+  position: absolute;
+  right: 60px;
+  text-align: right;
+}
+
+.banner-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #fff;
+}
+
+.banner-text h2 {
+  margin: 5px 0;
+  font-size: 28px;
+  color: #fff;
+}
+
+.banner-text button {
+  background: #f6a623;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.main-content {
+  display: flex;
+  padding: 30px 60px;
+  gap: 40px;
+}
+
+.sidebar {
+  flex: 0 0 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.sidebar h4 {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.sidebar ul,
+.sidebar .tag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 10px 12px;
+  border: 1px solid #eee;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  position: relative;
+  background: #fff;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.sidebar li::after {
+  content: '>';
+  position: absolute;
+  right: 12px;
+  color: #999;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.sidebar li:hover,
+.sidebar li.active {
+  border-color: #f6a623;
+  color: #f6a623;
+}
+
+.sidebar li.active::after,
+.sidebar li:hover::after {
+  color: #f6a623;
+}
+
+.color-boxes {
+  display: flex;
+  gap: 8px;
+}
+
+.color {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.color-0 { background: red; }
+.color-1 { background: green; }
+.color-2 { background: blue; }
+.color-3 { background: yellow; }
+.color-4 { background: purple; }
+.color-5 { background: orange; }
+.color-6 { background: pink; }
+.color-7 { background: brown; }
+
+.tag-list span {
+  display: inline-block;
+  background: #f4f4f4;
+  padding: 4px 10px;
+  border-radius: 15px;
+  margin: 4px 4px 0 0;
+  font-size: 12px;
+}
+
+.product-list {
+  flex: 1;
+}
+
+.all-sarees-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.all-sarees-header h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.all-sarees-header p {
+  font-size: 14px;
+  color: #666;
+  margin-right: auto;
+}
+
+.view-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.view-filters button {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.view-filters button.active {
+  background-color: #f6a623;
+}
+
+.view-filters select {
+  border: 1px solid #eee;
+  padding: 8px 14px;
+  border-radius: 30px;
+  font-size: 13px;
+  color: #333;
+  background: #fff;
+  cursor: pointer;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.product-card {
+  border: 1px solid #eee;
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+}
+
+.product-category {
+  color: #f6a623;
+  font-size: 12px;
+  margin: 8px 0 4px;
+  font-weight: 600;
+}
+
+.product-card h4 {
+  font-size: 16px;
+  margin: 4px 0;
+}
+
+.price {
+  font-weight: bold;
+  color: #333;
+}
+
+.description {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 40px 0 10px;
+}
+
+.pagination button {
+  background: #f6a623;
+  border: none;
+  padding: 6px 12px;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+@media (max-width: 1024px) {
+  .main-content {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .sidebar {
+    flex: 1;
+    order: 2;
+  }
+
+  .product-list {
+    order: 1;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .banner {
+    height: 200px;
+    padding: 0 20px;
+  }
+
+  .banner-text {
+    right: 20px;
+  }
+
+  .banner-text h2 {
+    font-size: 22px;
+  }
+
+  .banner-text button {
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .view-filters {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .all-sarees-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .banner {
+    height: 180px;
+    background-position: center;
+    padding: 10px;
+  }
+
+  .banner-text {
+    right: 10px;
+    text-align: right;
+  }
+
+  .banner-text h2 {
+    font-size: 18px;
+  }
+
+  .banner-text button {
+    font-size: 12px;
+  }
+
+  .sidebar li {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
