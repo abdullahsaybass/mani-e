@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Buy.css";
-import Header from '../Home/Navbar/Header'
-import Footer from '../Home/Footer/Footer'
-
+import Header from '../Home/Navbar/Header';
+import Footer from '../Home/Footer/Footer';
 
 export default function BuyNow() {
   const { backendUrl, isLoggedIn, userData } = useContext(AppContext);
@@ -105,148 +104,86 @@ export default function BuyNow() {
   return (
     <div>
       <Header />
-      
-      <div className="checkout-container">
-      <div className="checkout-main">
-        <div className="section">
-          <h2>Add delivery address</h2>
+      <div className="checkout-wrapper">
+        <div className="checkout-content">
+          <div className="checkout-section">
+            <h2>Select Delivery Address</h2>
+            {addresses.map((addr) => (
+              <label key={addr._id} className="checkout-address">
+                <input
+                  type="radio"
+                  name="address"
+                  value={addr._id}
+                  checked={selectedAddress === addr._id}
+                  onChange={() => setSelectedAddress(addr._id)}
+                />
+                <div>
+                  <strong>{addr.name}</strong> ({addr.label})<br />
+                  {addr.address}, {addr.city}, {addr.state} - {addr.pincode}
+                </div>
+              </label>
+            ))}
 
-          {addresses.map((addr) => (
-            <label key={addr._id} className="address-box">
-              <input
-                type="radio"
-                name="address"
-                value={addr._id}
-                checked={selectedAddress === addr._id}
-                onChange={() => setSelectedAddress(addr._id)}
-              />
-              <div>
-                <strong>{addr.name}</strong> ({addr.label})<br />
-                {addr.address}, {addr.city}, {addr.state} - {addr.pincode}
+            <button className="btn-yellow" onClick={() => setShowAddressForm(!showAddressForm)}>
+              {showAddressForm ? "Cancel" : "Add New Address"}
+            </button>
+
+            {showAddressForm && (
+              <form className="checkout-address-form" onSubmit={(e) => { e.preventDefault(); handleAddNewAddress(); }}>
+                <input placeholder="Name" value={newAddress.name} onChange={e => setNewAddress({ ...newAddress, name: e.target.value })} required />
+                <input placeholder="Phone" value={newAddress.phone} onChange={e => setNewAddress({ ...newAddress, phone: e.target.value })} required />
+                <input placeholder="Label (Home/Office)" value={newAddress.label} onChange={e => setNewAddress({ ...newAddress, label: e.target.value })} />
+                <input placeholder="Address" value={newAddress.address} onChange={e => setNewAddress({ ...newAddress, address: e.target.value })} required />
+                <input placeholder="City" value={newAddress.city} onChange={e => setNewAddress({ ...newAddress, city: e.target.value })} required />
+                <input placeholder="State" value={newAddress.state} onChange={e => setNewAddress({ ...newAddress, state: e.target.value })} required />
+                <input placeholder="Pincode" value={newAddress.pincode} onChange={e => setNewAddress({ ...newAddress, pincode: e.target.value })} required />
+                <button type="submit" className="btn-save-address">Save Address</button>
+              </form>
+            )}
+          </div>
+
+          <div className="checkout-section">
+            <h2>Review Your Order</h2>
+            {product ? (
+              <div className="checkout-item">
+                <img src={`${backendUrl}${product.mainImage}`} alt={product.title} className="item-thumb" />
+                <div>
+                  <h3>{product.title}</h3>
+                  <p>Qty: {quantity}</p>
+                  <p>Color: {selectedColor}</p>
+                  <p>Total: ₹{(product.price * quantity).toLocaleString()}</p>
+                </div>
               </div>
-            </label>
-          ))}
+            ) : (
+              <p>Loading product...</p>
+            )}
+          </div>
 
-          <button className="yellow-button" onClick={() => setShowAddressForm(!showAddressForm)}>
-            {showAddressForm ? "Cancel" : "Add a new delivery address"}
+          <div className="checkout-info">
+            <p>
+              Need help? Visit our <a href="#">help center</a> or <a href="#">contact us</a>.
+            </p>
+            <p>
+              Orders placed with online payment methods will redirect you to your bank’s site.
+              Your order is confirmed upon payment and dispatch. Pay on Delivery is also available.
+            </p>
+            <p>See our <a href="#">Return Policy</a>.</p>
+            <a className="link-cart" href="#">Back to Cart</a>
+          </div>
+        </div>
+
+        <div className="checkout-summary-box">
+          <button className="btn-place-order" disabled={!selectedAddress} onClick={handlePlaceOrder}>
+            Place Order
           </button>
-
-          {showAddressForm && (
-            <form className="address-form" onSubmit={(e) => { e.preventDefault(); handleAddNewAddress(); }}>
-              <input placeholder="Name" value={newAddress.name} onChange={e => setNewAddress({ ...newAddress, name: e.target.value })} required />
-              <input placeholder="Phone" value={newAddress.phone} onChange={e => setNewAddress({ ...newAddress, phone: e.target.value })} required />
-              <input placeholder="Label (Home/Office)" value={newAddress.label} onChange={e => setNewAddress({ ...newAddress, label: e.target.value })} />
-              <input placeholder="Address" value={newAddress.address} onChange={e => setNewAddress({ ...newAddress, address: e.target.value })} required />
-              <input placeholder="City" value={newAddress.city} onChange={e => setNewAddress({ ...newAddress, city: e.target.value })} required />
-              <input placeholder="State" value={newAddress.state} onChange={e => setNewAddress({ ...newAddress, state: e.target.value })} required />
-              <input placeholder="Pincode" value={newAddress.pincode} onChange={e => setNewAddress({ ...newAddress, pincode: e.target.value })} required />
-              <button type="submit" className="save-address-btn">Save Address</button>
-            </form>
-          )}
-        </div>
-
-        <div className="section">
-          <h2>Review items and shipping</h2>
-          {product ? (
-            <div className="order-item">
-              <img src={`${backendUrl}${product.mainImage}`} alt={product.title} width={100} />
-              <div>
-                <h3>{product.title}</h3>
-                <p>Qty: {quantity}</p>
-                <p>Color: {selectedColor}</p>
-                <p>Total: ₹{(product.price * quantity).toLocaleString()}</p>
-              </div>
-            </div>
-          ) : (
-            <p>Loading product...</p>
-          )}
-        </div>
-
-        <div className="help-section">
-          <p>
-            Need help? Check our <a href="#">help pages</a> or <a href="#">contact us 24x7</a>
-          </p>
-          <p>
-            When your order is placed, we’ll send you an e-mail message acknowledging
-            receipt of your order. If you choose to pay using an electronic payment method
-            (credit card, debit card or net banking), you will be directed to your bank’s
-            website to complete your payment. Your contract to purchase an item will not
-            be complete until we receive your electronic payment and dispatch your item.
-            If you choose to pay using Pay on Delivery (POD), you can pay using cash/card/net
-            banking when you receive your item.
-          </p>
-          <p>
-            See Amazon.in’s <a href="#">Return Policy</a>.
-          </p>
-          <a className="back-to-cart" href="#">Back to cart</a>
+          <div className="summary-breakdown">
+            <p><strong>Items:</strong> ₹{product ? (product.price * quantity).toLocaleString() : "--"}</p>
+            <p><strong>Delivery:</strong> ₹99</p>
+            <p><strong>Total:</strong> ₹{product ? (product.price * quantity + 99).toLocaleString() : "--"}</p>
+          </div>
         </div>
       </div>
-
-      <div className="checkout-summary">
-        <button className="deliver-button" disabled={!selectedAddress} onClick={handlePlaceOrder}>
-          Deliver to this address
-        </button>
-        <div className="summary-details">
-          <p><strong>Items:</strong> ₹{product ? (product.price * quantity).toLocaleString() : "--"}</p>
-          <p><strong>Delivery:</strong> ₹99</p>
-          <p><strong>Order Total:</strong> ₹{product ? (product.price * quantity + 99).toLocaleString() : "--"}</p>
-        </div>
-      </div>
-    </div>
-    <Footer />
+      <Footer />
     </div>
   );
-} 
-
-
-// import React from "react";
-// import "./Buy.css";
-
-// export default function Checkout() {
-//   return (
-//     <div className="checkout-container">
-//       <div className="checkout-main">
-//         <div className="section">
-//           <h2>Add delivery address</h2>
-//           <button className="yellow-button">Add a new delivery address</button>
-//         </div>
-
-//         <div className="section">
-//           <h2>Payment method</h2>
-//         </div>
-
-//         <div className="section">
-//           <h2>Review items and shipping</h2>
-//         </div>
-
-//         <div className="help-section">
-//           <p>
-//             Need help? Check our <a href="#">help pages</a> or <a href="#">contact us 24x7</a>
-//           </p>
-//           <p>
-//             When your order is placed, we’ll send you an e-mail message acknowledging
-//             receipt of your order. If you choose to pay using an electronic payment method
-//             (credit card, debit card or net banking), you will be directed to your bank’s
-//             website to complete your payment. Your contract to purchase an item will not
-//             be complete until we receive your electronic payment and dispatch your item.
-//             If you choose to pay using Pay on Delivery (POD), you can pay using cash/card/net
-//             banking when you receive your item.
-//           </p>
-//           <p>
-//             See Amazon.in’s <a href="#">Return Policy</a>.
-//           </p>
-//           <a className="back-to-cart" href="#">Back to cart</a>
-//         </div>
-//       </div>
-
-//       <div className="checkout-summary">
-//         <button className="deliver-button">Deliver to this address</button>
-//         <div className="summary-details">
-//           <p><strong>Items:</strong> --</p>
-//           <p><strong>Delivery:</strong> --</p>
-//           <p><strong>Order Total:</strong> --</p>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
+}
