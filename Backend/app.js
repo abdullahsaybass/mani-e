@@ -101,6 +101,6 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 8000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${PORT} in ${NODE_ENV} mode`);
-});
+})
