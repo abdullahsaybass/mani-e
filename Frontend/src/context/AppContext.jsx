@@ -1,4 +1,5 @@
-// src/context/AppContext.js
+// ✅ AppContext.js (updated with authChecked)
+
 import React, { createContext, useState, useEffect } from "react";
 
 export const AppContext = createContext();
@@ -7,10 +8,10 @@ export function AppContextProvider({ children }) {
   const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false); // ✅ NEW
   const [userData, setUserData] = useState(null);
   const [cart, setCart] = useState({ items: [] });
 
-  // Load cart data
   const loadCart = async () => {
     try {
       const res = await fetch(`${backendUrl}/api/cart`, {
@@ -23,7 +24,6 @@ export function AppContextProvider({ children }) {
     }
   };
 
-  // Check auth on mount
   useEffect(() => {
     (async () => {
       try {
@@ -35,14 +35,20 @@ export function AppContextProvider({ children }) {
           setIsLoggedIn(true);
           setUserData(json.user);
           await loadCart();
+        } else {
+          setIsLoggedIn(false);
+          setUserData(null);
         }
       } catch (err) {
         console.error("Auth check failed:", err.message);
+        setIsLoggedIn(false);
+        setUserData(null);
+      } finally {
+        setAuthChecked(true); // ✅ Mark completed
       }
     })();
   }, []);
 
-  // Login
   const login = async (email, password) => {
     const res = await fetch(`${backendUrl}/api/auth/login`, {
       method: "POST",
@@ -57,7 +63,6 @@ export function AppContextProvider({ children }) {
     await loadCart();
   };
 
-  // Logout
   const logout = async () => {
     await fetch(`${backendUrl}/api/auth/logout`, {
       method: "POST",
@@ -68,7 +73,6 @@ export function AppContextProvider({ children }) {
     setCart({ items: [] });
   };
 
-  // Create product (Admin)
   const createProduct = async (productData) => {
     const formData = new FormData();
     formData.append("title", productData.title);
@@ -109,7 +113,6 @@ export function AppContextProvider({ children }) {
     return res.json();
   };
 
-  // Add to cart
   const addToCart = async (productId, quantity = 1) => {
     if (!isLoggedIn) throw new Error("Not authenticated. Please log in first.");
     const res = await fetch(`${backendUrl}/api/cart`, {
@@ -127,7 +130,6 @@ export function AppContextProvider({ children }) {
     return updatedCart;
   };
 
-  // ✅ Place order with selected address
   const placeOrder = async (addressId) => {
     if (!isLoggedIn) throw new Error("Not authenticated");
 
@@ -144,7 +146,7 @@ export function AppContextProvider({ children }) {
     }
 
     const order = await res.json();
-    setCart({ items: [] }); // Clear cart after order
+    setCart({ items: [] }); // Clear cart
     return order;
   };
 
@@ -154,6 +156,7 @@ export function AppContextProvider({ children }) {
         backendUrl,
         isLoggedIn,
         setIsLoggedIn,
+        authChecked, // ✅ included here
         login,
         logout,
         userData,
@@ -161,7 +164,7 @@ export function AppContextProvider({ children }) {
         cart,
         createProduct,
         addToCart,
-        placeOrder, // 👈 included here
+        placeOrder,
       }}
     >
       {children}

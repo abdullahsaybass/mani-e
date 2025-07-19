@@ -1,9 +1,16 @@
+.hero-container {
+  width: 100%;
+  overflow: hidden;
+}
+
 .saree-slider-section {
   position: relative;
-  padding: 4rem 2rem;
+  min-height: 100vh;
   color: white;
   z-index: 1;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .rotated-background {
@@ -23,8 +30,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #800000;
-  opacity: 0.7;
+  background: #800101;
+  opacity: 0.6;
   z-index: -2;
 }
 
@@ -36,9 +43,14 @@
   margin: auto;
 }
 
+.saree-text {
+  padding-left: 40px;
+}
+
 .saree-image img {
   height: 800px;
-  max-width: 100%;
+  width: 800px;
+  object-fit: cover;
 }
 
 .edition {
@@ -61,8 +73,9 @@
   margin: 16px 0;
 }
 
-.description {
-  font-size: 18px;
+.descriptions {
+  font-size: 20px;
+  color: #fff;
   margin-bottom: 20px;
 }
 
@@ -74,12 +87,13 @@
 
 .features li {
   margin-bottom: 8px;
+  color: #c4bfbf;
 }
 
-.price {
+.prices {
   font-size: 22px;
   font-weight: bold;
-  color: #fff;
+  color: #c4bfbf;
   margin-bottom: 20px;
 }
 
@@ -89,73 +103,84 @@
   gap: 1rem;
 }
 
-.btn {
-  padding: 20px 30px;
+.btns {
+  padding: 20px 40px;
   font-weight: 600;
   border: none;
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: 50px;
   font-size: 16px;
 }
 
-.btn.white {
+.btns.white {
   background-color: white;
   color: black;
 }
 
-.btn.black {
+.btns.black {
   background-color: black;
   color: white;
 }
 
-/* Responsive: Tablet and below */
+/* Tablet */
 @media (max-width: 1024px) {
   .saree-container {
     flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
     gap: 2rem;
-    text-align: center;
+    padding: 0 1.5rem;
+  }
+
+  .saree-text {
+    padding-left: 0;
   }
 
   .saree-image img {
-    height: 600px;
+    height: 500px;
+    width: auto;
+    max-width: 100%;
   }
 
   .titles {
     font-size: 56px;
   }
 
-  .description {
-    font-size: 16px;
+  .descriptions {
+    font-size: 18px;
   }
 
-  .price {
+  .prices {
     font-size: 20px;
   }
 
   .buttons {
-    flex-direction: column;
-    gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
-  .btn {
+  .btns {
     padding: 16px 24px;
     font-size: 14px;
   }
 }
 
-/* Responsive: Mobile (≤768px) */
+/* Mobile */
 @media (max-width: 768px) {
   .saree-container {
+    flex-direction: column;
+    align-items: flex-start;
     padding: 0 1rem;
+    text-align: left;
   }
 
-  /* Hide image on mobile */
-  .saree-image {
-    display: none;
+  .saree-text {
+    padding-left: 0;
   }
 
-  .edition {
-    font-size: 12px;
+  .saree-image img {
+    height: 300px;
+    width: auto;
+    max-width: 100%;
   }
 
   .titles {
@@ -165,111 +190,135 @@
   .divider {
     width: 30px;
     height: 3px;
+    margin: 12px 0;
   }
 
-  .description {
-    font-size: 14px;
+  .descriptions {
+    font-size: 16px;
     margin-bottom: 16px;
   }
 
-  .features li {
+  .features {
     font-size: 14px;
   }
 
-  .price {
+  .prices {
     font-size: 18px;
   }
 
   .buttons {
-    gap: 0.5rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
 
-  .btn {
-    padding: 12px 20px;
-    font-size: 13px;
+  .btns {
+    padding: 14px 22px;
+    font-size: 14px;
+  }
+
+  .rotated-background {
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    transform: rotate(0deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -3;
   }
 }
 
-/* Responsive: Small phones (≤480px) */
+/* Small Phones */
 @media (max-width: 480px) {
   .titles {
     font-size: 32px;
     line-height: 1.2;
   }
 
-  .description {
-    font-size: 13px;
+  .descriptions {
+    font-size: 14px;
   }
 
   .features li {
     font-size: 13px;
   }
 
-  .price {
+  .prices {
     font-size: 16px;
   }
 
-  .btn {
-    padding: 10px 16px;
+  .btns {
+    padding: 12px 18px;
     font-size: 12px;
   }
+
+  .saree-image img {
+    height: 240px;
+  }
 }
+/* Mobile */
 @media (max-width: 768px) {
   .saree-container {
-    padding: 0rem 0rem;
-    text-align: left;
+    flex-direction: column;
     align-items: flex-start;
+    padding: 0 1rem;
+    text-align: left;
   }
 
+  .saree-text {
+    padding-left: 0;
+  }
+
+  /* ✅ Hide image on mobile */
   .saree-image {
     display: none;
   }
 
-  .edition {
-    font-size: 18px; /* Increased size */
-    font-weight: 600;
-    color: #eee;
-  }
-
   .titles {
-    font-size: 42px;
-    font-weight: 800;
+    font-size: 40px;
   }
 
   .divider {
     width: 30px;
     height: 3px;
-    margin-left: 0;
+    margin: 12px 0;
   }
 
-  .description {
-    font-size: 15px;
+  .descriptions {
+    font-size: 16px;
     margin-bottom: 16px;
   }
 
   .features {
-    display: none; /* Hide on mobile */
+    font-size: 14px;
   }
 
-  .price {
+  .prices {
     font-size: 18px;
-    margin-bottom: 16px;
   }
 
+  /* ✅ Always horizontal buttons */
   .buttons {
     flex-direction: row;
-    gap: 0.75rem;
     flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-start;
   }
 
-  .btn {
+  .btns {
     padding: 14px 22px;
-    font-size: 13px;
-    border-radius: 25px;
+    font-size: 14px;
   }
 
   .rotated-background {
-    height: 90vh; /* Increase background image height */
+    height: 100vh;
+    width: 100%;
     object-fit: cover;
+    transform: rotate(0deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -3;
   }
 }

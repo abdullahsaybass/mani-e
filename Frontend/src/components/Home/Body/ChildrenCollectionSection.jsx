@@ -1,17 +1,27 @@
 import React from "react";
 import "./ChildrenCollectionSection.css";
+import { assets } from "../../../assets/assets";
 
 const ChildrenCollection = () => {
   const thumbnails = [
-    // "/images/child-thumb1.png",
-    // "/images/child-thumb2.png",
-    // "/images/child-thumb3.png",
+    assets.kutchild,
+    assets.kutchild,
+    assets.kutchild,
   ];
 
   return (
     <div className="children-collection">
       <div className="children-collection__container">
-        {/* Left Thumbnails */}
+        {/* Main Image */}
+        <div className="children-collection__main-image-wrapper">
+          <img
+            src={assets.kutchild}
+            alt="Children Model"
+            className="children-collection__main-image"
+          />
+        </div>
+
+        {/* Right Thumbnails */}
         <div className="children-collection__thumbnails">
           {thumbnails.map((src, index) => (
             <img
@@ -23,16 +33,7 @@ const ChildrenCollection = () => {
           ))}
         </div>
 
-        {/* Main Image */}
-        <div className="children-collection__main-image-wrapper">
-          <img
-            src="/images/main-child.png"
-            alt="Children Model"
-            className="children-collection__main-image"
-          />
-        </div>
-
-        {/* Right Content */}
+        {/* Content Section */}
         <div className="children-collection__content">
           <h4 className="children-collection__subheading">Modern Collection</h4>
           <h2 className="children-collection__heading">FOR CHILDRENS</h2>
@@ -57,8 +58,10 @@ const ChildrenCollection = () => {
 
           <div className="children-collection__actions">
             <span className="children-collection__price">BEST PRICE: ₹195.00</span>
-            <button className="children-collection__btn children-collection__btn--learn">LEARN MORE</button>
-            <button className="children-collection__btn children-collection__btn--cart">ADD TO CART</button>
+            <div className="children-collection__btn-group">
+              <button className="children-collection__btn children-collection__btn--learn">LEARN MORE</button>
+              <button className="children-collection__btn children-collection__btn--cart">ADD TO CART</button>
+            </div>
           </div>
         </div>
       </div>

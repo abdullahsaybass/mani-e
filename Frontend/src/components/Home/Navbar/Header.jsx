@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import {
-  FaHeart,
   FaShoppingBag,
   FaBars,
   FaTimes,
@@ -13,39 +12,41 @@ import "./Header.css";
 
 const MENU = [
   { label: "Home", href: "/" },
-  {
-    label: "Products",
-    href: "/products",
-    subMenu: [
-      { label: "Men", href: "/products/men" },
-      { label: "Women", href: "/products/women" },
-      { label: "Kids", href: "/products/kids" },
-    ],
-  },
-  { label: "Track Order", href: "/trackorder" },
+  { label: "Men", href: "/men" },
+  { label: "Women", href: "/women" },
+  { label: "Kids", href: "/kutties" },
   { label: "Cart", href: "/cartpage" },
   { label: "Contact", href: "/contact" },
-  { label: "Blog", href: "/blog" },
 ];
 
 const Header = () => {
-  const { isLoggedIn, logout, cart } = useContext(AppContext);
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    setUserData,
+    backendUrl,
+    cart,
+  } = useContext(AppContext);
   const [activeIndex, setActiveIndex] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   const totalItems = cart?.items?.reduce((sum, i) => sum + i.quantity, 0) || 0;
-  const totalPrice = cart?.items?.reduce(
-    (sum, i) => sum + i.quantity * (i.product?.price || 0),
-    0
-  ) || 0;
 
   const handleLogout = async () => {
     try {
-      await logout();
-      navigate("/");
+      await fetch(`${backendUrl}/api/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+
+      setIsLoggedIn(false);
+      setUserData(null);
+      setIsProfileDropdownOpen(false);
+      navigate("/login");
     } catch (err) {
-      console.error("Logout failed:", err.message);
+      console.error("Logout failed:", err);
     }
   };
 
@@ -60,6 +61,7 @@ const Header = () => {
             <span>EMAIL: MANITEXTILESTHEGRANDSTORE@GMAIL.COM</span>
           </div>
         </div>
+
         <div className="right-section">
           <div className="slice login-slice desktop-only">
             {!isLoggedIn ? (
@@ -69,28 +71,34 @@ const Header = () => {
                 <Link to="/register">REGISTER</Link>
               </>
             ) : (
-              <>
-                <Link to="/profile" className="profile-icon">
+              <div className="profile-dropdown">
+                <button
+                  className="profile-icon"
+                  onClick={() =>
+                    setIsProfileDropdownOpen((prev) => !prev)
+                  }
+                >
                   <FaUserCircle />
-                </Link>
-                <button className="logout-btn" onClick={handleLogout}>
-                  Logout
                 </button>
-              </>
+                {isProfileDropdownOpen && (
+                  <div className="dropdown-links">
+                    <Link to="/orders" onClick={() => setIsProfileDropdownOpen(false)}>My Orders</Link>
+                    <Link to="/cartpage" onClick={() => setIsProfileDropdownOpen(false)}>Cart</Link>
+                    <button onClick={handleLogout} className="logout-btn">Logout</button>
+                  </div>
+                )}
+              </div>
             )}
           </div>
-          <div className="icon-slice">
-            <FaHeart />
-          </div>
+
           <div
             className="slice cart-slice"
             onClick={() => navigate("/cartpage")}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
           >
             <span className="bag-text">YOUR BAG</span>
             <FaShoppingBag />
             <span className="badge">{totalItems}</span>
-            <span className="price">₹{totalPrice.toLocaleString()}</span>
           </div>
         </div>
       </div>
@@ -102,23 +110,6 @@ const Header = () => {
           </Link>
 
           <div className="mobile-header-actions">
-            {!isMobileMenuOpen && (
-              !isLoggedIn ? (
-                <Link className="mobile-login-btn" to="/login">
-                  LOGIN
-                </Link>
-              ) : (
-                <>
-                  <Link to="/profile" className="mobile-profile-icon">
-                    <FaUserCircle />
-                  </Link>
-                  <button className="mobile-logout-btn" onClick={handleLogout}>
-                    Logout
-                  </button>
-                </>
-              )
-            )}
-
             {isMobileMenuOpen ? (
               <FaTimes
                 className="hamburger-icon close-icon"
@@ -142,6 +133,22 @@ const Header = () => {
                   />
                 </Link>
               </div>
+
+              <div className="sidebar-auth-section">
+                {!isLoggedIn ? (
+                  <>
+                    <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>LOGIN</Link>
+                    <Link to="/register" onClick={() => setIsMobileMenuOpen(false)}>REGISTER</Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/orders" onClick={() => setIsMobileMenuOpen(false)}>My Orders</Link>
+                    <Link to="/cartpage" onClick={() => setIsMobileMenuOpen(false)}>Cart</Link>
+                    <button onClick={handleLogout}>Logout</button>
+                  </>
+                )}
+              </div>
+
               {MENU.map((item, idx) => (
                 <div key={idx}>
                   <Link
@@ -160,10 +167,18 @@ const Header = () => {
           </div>
 
           <div className="header-menu">
-            <FaBars
-              className="hamburger-icon"
-              onClick={() => setIsMobileMenuOpen(true)}
-            />
+            {isMobileMenuOpen ? (
+              <FaTimes
+                className="hamburger-icon close-icon"
+                onClick={() => setIsMobileMenuOpen(false)}
+              />
+            ) : (
+              <FaBars
+                className="hamburger-icon"
+                onClick={() => setIsMobileMenuOpen(true)}
+              />
+            )}
+
             <nav className="nav-links desktop-nav">
               {MENU.map((item, idx) => (
                 <div
@@ -175,7 +190,6 @@ const Header = () => {
                   <Link
                     to={item.href}
                     className={idx === activeIndex ? "active" : ""}
-                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
                   </Link>
@@ -186,7 +200,6 @@ const Header = () => {
                           key={subIdx}
                           to={sub.href}
                           className="dropdown-item"
-                          onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {sub.label}
                         </Link>

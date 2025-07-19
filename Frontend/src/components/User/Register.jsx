@@ -1,5 +1,3 @@
-// src/components/User/RegisterForm.jsx
-
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Register.css';
@@ -14,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
-  const { backendUrl, setIsLoggedIn, setUserData } = useContext(AppContext);
+  const { backendUrl } = useContext(AppContext);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -23,6 +21,7 @@ const RegisterForm = () => {
     confirmPassword: ''
   });
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = e => {
     setFormData(f => ({ ...f, [e.target.name]: e.target.value }));
@@ -35,38 +34,37 @@ const RegisterForm = () => {
     if (!name || !email || !password || !confirmPassword) {
       return toast.error("All fields are required");
     }
+
     if (password !== confirmPassword) {
       return toast.error("Passwords do not match");
     }
 
     setLoading(true);
     try {
-      // 1. Register
       const res = await fetch(`${backendUrl}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',           // << important for cookies
+        credentials: 'include',
         body: JSON.stringify({ name, email, password })
       });
+
+      const contentType = res.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        const text = await res.text(); // In case HTML error page
+        throw new Error("Server did not return JSON:\n" + text.slice(0, 100));
+      }
+
       const data = await res.json();
-      if (!res.ok || data.success === 'false') {
+
+      if (!res.ok || data.success === false) {
         throw new Error(data.message || "Registration failed");
       }
-      toast.success("Registered! Logging you in...");
 
-      // 2. Check authentication and load user
-      const authRes = await fetch(`${backendUrl}/api/auth/authenticated`, {
-        method: 'POST',
-        credentials: 'include'
-      });
-      const authData = await authRes.json();
-      if (authData.success) {
-        setIsLoggedIn(true);
-        setUserData(authData.user);
-      }
+      setSuccessMessage("✅ Registration successful! Redirecting to login...");
 
-      // 3. Redirect to homepage
-      navigate('/');
+      setTimeout(() => {
+        navigate('/login');
+      }, 2500);
     } catch (err) {
       console.error("Register error:", err);
       toast.error(err.message);
@@ -81,6 +79,12 @@ const RegisterForm = () => {
       <div className="register-container">
         <div className="register-box">
           <h2 className="register-title">REGISTER</h2>
+
+          {successMessage && (
+            <div className="success-banner">
+              {successMessage}
+            </div>
+          )}
 
           <form className="register-form" onSubmit={handleSubmit}>
             <div className="input-with-icon">

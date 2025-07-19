@@ -12,6 +12,9 @@ import AdminPanel from './Admin/Admin';
 import AddProduct from './Admin/Addproduct/AddProduct';
 import OrderList from './Admin/order/Order';
 import BuyNow from './components/Buy/Buy';
+import Menproduct from './pages/men/MenProduct'
+import KidsProductss from './components/Productpage/kids';
+
 
 function App() {
   return (
@@ -22,10 +25,13 @@ function App() {
       <Route path="/cartpage" element={<Cartpage />} />
       <Route path="/trackorder" element={<Trackorderpage />} />
       <Route path="/contact" element={<Contactpage />} />
+      <Route path="/kidsproject" element={<kidsproject />} />
       <Route path="/women" element={<Women />} />
+      <Route path="/men" element={<Menproduct />} />
       <Route path="/product/:id" element={<Productpage />} />
        <Route path="/buy-now" element={<BuyNow />} />
-
+       <Route path="/kutties" element={<KidsProductss />} />
+      
 
       {/* Admin Panel Routes */}
       <Route path="/admin" element={<AdminPanel />}>

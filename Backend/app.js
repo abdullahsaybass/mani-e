@@ -1,59 +1,59 @@
 
-// // import express from 'express';
-// // import dotenv from 'dotenv';
-// // import path from 'path';
-// // import { fileURLToPath } from 'url';
-// // import cookieParser from 'cookie-parser';
-// // import cors from 'cors';
-// // import connectDB from './config/mongobd.js';
+import express from 'express';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import connectDB from './config/mongobd.js';
 
-// // import productRoutes from './routes/product.js';
-// // import orderRoutes   from './routes/order.js';
-// // import authRoutes    from './routes/auth.js';
-// // import cartRoutes    from './routes/cart.js';
-// // // import userRoutes from './routes/user.js'; // optional
+import productRoutes from './routes/product.js';
+import orderRoutes   from './routes/order.js';
+import authRoutes    from './routes/auth.js';
+import cartRoutes    from './routes/cart.js';
+import userRoutes from './routes/user.js'; 
 
-// // dotenv.config({ path: './.env' });
+dotenv.config({ path: './.env' });
 
-// // // ✅ Resolve __dirname in ES Module
-// // const __filename = fileURLToPath(import.meta.url);
-// // const __dirname  = path.dirname(__filename);
+// ✅ Resolve __dirname in ES Module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname  = path.dirname(__filename);
 
-// // // ✅ Connect to MongoDB
-// // connectDB();
+// ✅ Connect to MongoDB
+connectDB();
 
-// // const app = express();
+const app = express();
 
-// // // ✅ Middleware
-// // app.use(cors({
-// //   origin: process.env.CLIENT_URL || 'http://localhost:5173',
-// //   credentials: true,
-// // }));
-// // app.use(express.json()); // Parses JSON body
-// // app.use(cookieParser()); // For reading cookies
+// ✅ Middleware
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  credentials: true,
+}));
+app.use(express.json()); // Parses JSON body
+app.use(cookieParser()); // For reading cookies
 
-// // // ✅ Serve static files (uploaded images)
-// // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// ✅ Serve static files (uploaded images)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// // // ✅ API Routes
-// // app.use('/api/auth',     authRoutes);
-// // app.use('/api/products', productRoutes);
-// // app.use('/api/cart',     cartRoutes);
-// // app.use('/api/orders',   orderRoutes);
-// // // app.use('/api/user',  userRoutes); // Optional
+// ✅ API Routes
+app.use('/api/auth',     authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/cart',     cartRoutes);
+app.use('/api/orders',   orderRoutes);
+app.use('/api/user',  userRoutes); // Optional
 
-// // // ✅ Health Check Route
-// // app.get('/', (req, res) => {
-// //   res.send(`✅ Server running on port ${process.env.PORT || 8000}`);
-// // });
+// ✅ Health Check Route
+app.get('/', (req, res) => {
+  res.send(`✅ Server running on port ${process.env.PORT || 8000}`);
+});
 
-// // // ✅ Start the Server
-// // const PORT = process.env.PORT || 8000;
-// // const NODE_ENV = process.env.NODE_ENV || 'development';
+// ✅ Start the Server
+const PORT = process.env.PORT || 8000;
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
-// // app.listen(PORT, () => {
-// //   console.log(`🚀 Server running on port ${PORT} in ${NODE_ENV} mode`);
-// // });
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT} in ${NODE_ENV} mode`);
+});
 
 // import express from 'express';
 // import dotenv from 'dotenv';
@@ -107,52 +107,52 @@
 
 // export default serverless(app);
 
-import express from 'express';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import serverless from 'serverless-http';
+// import express from 'express';
+// import dotenv from 'dotenv';
+// import path from 'path';
+// import { fileURLToPath } from 'url';
+// import cookieParser from 'cookie-parser';
+// import cors from 'cors';
+// import serverless from 'serverless-http';
 
-import connectDB from '../config/mongobd.js'; // update path for /api folder
-import productRoutes from '../routes/product.js';
-import orderRoutes from '../routes/order.js';
-import authRoutes from '../routes/auth.js';
-import cartRoutes from '../routes/cart.js';
-import userRoutes from '../routes/user.js';
+// import connectDB from '../config/mongobd.js'; // update path for /api folder
+// import productRoutes from '../routes/product.js';
+// import orderRoutes from '../routes/order.js';
+// import authRoutes from '../routes/auth.js';
+// import cartRoutes from '../routes/cart.js';
+// import userRoutes from '../routes/user.js';
 
-dotenv.config();
+// dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-connectDB(); // Make sure this is safe to call multiple times in serverless
+// connectDB(); // Make sure this is safe to call multiple times in serverless
 
-const app = express();
+// const app = express();
 
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: process.env.CLIENT_URL || 'http://localhost:5173',
+//   credentials: true,
+// }));
 
-app.use(express.json());
-app.use(cookieParser());
+// app.use(express.json());
+// app.use(cookieParser());
 
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+// app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// ✅ API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/cart', cartRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api/user', userRoutes);
+// // ✅ API Routes
+// app.use('/api/auth', authRoutes);
+// app.use('/api/products', productRoutes);
+// app.use('/api/cart', cartRoutes);
+// app.use('/api/orders', orderRoutes);
+// app.use('/api/user', userRoutes);
 
-// ✅ Health check route
-app.get('/', (req, res) => {
-  res.send('✅ Express + Vercel working');
-});
+// // ✅ Health check route
+// app.get('/', (req, res) => {
+//   res.send('✅ Express + Vercel working');
+// });
 
-// ❌ REMOVE this: app.listen(...)
-// ✅ Instead, export for Vercel
-export default serverless(app);
+// // ❌ REMOVE this: app.listen(...)
+// // ✅ Instead, export for Vercel
+// export default serverless(app);

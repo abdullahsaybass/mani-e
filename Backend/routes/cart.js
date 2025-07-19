@@ -24,4 +24,3 @@ router.delete('/:productId', isAuthenticated, removeFromCart); // DELETE /api/ca
 
 export default router;
 
-

@@ -1,12 +1,26 @@
-
-/* ChildrenCollectionSection.css */
 .children-collection {
-  background: url('/images/background-pattern.png') repeat center;
-  background-color: #630000;
+  position: relative;
   padding: 60px 0;
-  font-family: 'Poppins', sans-serif;
   color: white;
+  z-index: 1;
 }
+
+.children-collection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(155, 3, 3, 0.4); /* Red overlay with 40% opacity */
+  z-index: -1;
+}
+
+.children-collection::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('../../../assets/background.jpg') repeat center;
+  z-index: -2;
+}
+
 
 .children-collection__container {
   display: flex;
@@ -16,6 +30,7 @@
   margin: 0 auto;
   gap: 80px;
   padding: 0 20px;
+  flex-wrap: wrap;
 }
 
 .children-collection__thumbnails {
@@ -91,8 +106,9 @@
 
 .children-collection__actions {
   display: flex;
-  align-items: center;
-  gap: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .children-collection__price {
@@ -101,8 +117,14 @@
   color: #fbd34d;
 }
 
+.children-collection__btn-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .children-collection__btn {
-  padding: 24px 40px;
+  padding: 14px 40px;
   border: none;
   cursor: pointer;
   font-weight: 600;
@@ -124,18 +146,12 @@
   transform: scale(1.05);
 }
 
-/* Responsive: Tablet */
+/* Tablet */
 @media (max-width: 1024px) {
   .children-collection__container {
     flex-direction: column;
     gap: 40px;
     text-align: left;
-  }
-
-  .children-collection__thumbnails {
-    flex-direction: row;
-    justify-content: center;
-    gap: 16px;
   }
 
   .children-collection__main-image {
@@ -153,20 +169,35 @@
   }
 
   .children-collection__actions {
-    flex-direction: column;
-    gap: 12px;
     align-items: flex-start;
   }
 }
 
-/* Responsive: Mobile */
+/* Mobile */
 @media (max-width: 768px) {
   .children-collection {
     padding: 40px 10px;
   }
 
+  .children-collection__container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .children-collection__main-image-wrapper {
+    margin-bottom: 12px;
+  }
+
   .children-collection__main-image {
     height: 280px;
+  }
+
+  .children-collection__thumbnails {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 12px;
   }
 
   .children-collection__heading {
@@ -181,8 +212,14 @@
     font-size: 14px;
   }
 
+  .children-collection__features-list:nth-child(2) {
+    display: none;
+  }
+
   .children-collection__price {
     font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
   }
 
   .children-collection__btn {
@@ -190,21 +227,26 @@
     font-size: 14px;
   }
 
-  /* Force left alignment */
-  .children-collection__container,
-  .children-collection__content,
-  .children-collection__subheading,
-  .children-collection__heading,
-  .children-collection__description,
-  .children-collection__features-list,
-  .children-collection__features-list li,
+  .children-collection__content {
+    width: 100%;
+    margin-top: 20px;
+  }
+
   .children-collection__actions {
-    text-align: left;
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
+  }
+
+  .children-collection__btn-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 }
 
-/* Responsive: Small screens */
+/* Small screens */
 @media (max-width: 480px) {
   .children-collection__heading {
     font-size: 24px;
@@ -222,21 +264,14 @@
     width: 50px;
     height: 50px;
   }
+  .children-collection__thumbnails {
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 25px;
+}
+
 
   .children-collection__main-image {
     height: 220px;
-  }
-
-  /* Ensure mobile smallest screens left-aligned */
-  .children-collection__container,
-  .children-collection__content,
-  .children-collection__subheading,
-  .children-collection__heading,
-  .children-collection__description,
-  .children-collection__features-list,
-  .children-collection__features-list li,
-  .children-collection__actions {
-    text-align: left;
-    align-items: flex-start;
   }
 }

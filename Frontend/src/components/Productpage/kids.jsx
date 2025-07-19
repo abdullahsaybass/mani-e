@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import './Womenproduct.css';
+import './kids.css';
 import { AppContext } from '../../context/AppContext';
+import Header from '../Home/Navbar/Header';
+import Footer from '../Home/Footer/Footer';
 
-function Womenproduct() {
+function KidsProductss() {
   const { backendUrl } = useContext(AppContext);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [priceRange, setPriceRange] = useState([0, 20000]);
-  const [selectedSareeType, setSelectedSareeType] = useState('All');
+  const [selectedType, setSelectedType] = useState('All');
   const [selectedColor, setSelectedColor] = useState('All');
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(`${backendUrl}/api/products?gender=Female`);
+        const res = await fetch(`${backendUrl}/api/products?gender=Kids`);
         const data = await res.json();
         if (data.success) {
           setProducts(data.products);
@@ -30,14 +32,16 @@ function Womenproduct() {
     fetchProducts();
   }, [backendUrl]);
 
-  const sareeTypes = [
+  const kidsTypes = [
     'All',
-    'Cotton',
-    'Silk',
-    'Kancheepuram',
-    'Pattu',
-    'Semi Banarasi',
-    'Short Cotton Sarees'
+    'Frock',
+    'T-Shirt',
+    'Shirt',
+    'Shorts',
+    'Jeans',
+    'Dungaree',
+    'Kurta',
+    'Dress'
   ];
 
   const availableColors = ['All', ...new Set(
@@ -48,40 +52,42 @@ function Womenproduct() {
 
   const filteredProducts = products.filter(product => {
     const priceInRange = product.price >= priceRange[0] && product.price <= priceRange[1];
-    
-    const sareeTypeMatch = selectedSareeType === 'All' || 
-      product.category.toLowerCase().trim() === selectedSareeType.toLowerCase().trim();
+
+    const typeMatch = selectedType === 'All' || 
+      product.category.toLowerCase().trim() === selectedType.toLowerCase().trim();
 
     const colorMatch = selectedColor === 'All' || 
       (product.variants || []).some(v => v.color === selectedColor);
 
-    return priceInRange && sareeTypeMatch && colorMatch;
+    return priceInRange && typeMatch && colorMatch;
   });
 
   if (loading) {
-    return <div className="loading">Loading products...</div>;
+    return <div className="loading">Loading kids products...</div>;
   }
 
   return (
-    <div className="page-container">
+    <div className="div">
+      <Header />
+      <div className="page-container">
       <header className="banner">
         <div className="banner-text">
-          <p>DON'T MISS</p>
-          <h2>UP TO 70%<br />BEST SILK SAREES</h2>
-          <button>LEARN MORE</button>
+          <p>NEW ARRIVALS</p>
+          <h2>KIDS COLLECTION<br />FRESH AND TRENDY</h2>
+          <button>EXPLORE NOW</button>
         </div>
       </header>
 
       <div className="main-content">
         <aside className="sidebar">
           <div className="categories">
-            <h4>TYPES OF SAREES</h4>
+            <h4>PRODUCT TYPES</h4>
             <ul>
-              {sareeTypes.map(type => (
+              {kidsTypes.map(type => (
                 <li 
                   key={type}
-                  className={selectedSareeType === type ? 'active' : ''}
-                  onClick={() => setSelectedSareeType(type)}
+                  className={selectedType === type ? 'active' : ''}
+                  onClick={() => setSelectedType(type)}
                 >
                   {type.toUpperCase()}
                 </li>
@@ -132,7 +138,7 @@ function Womenproduct() {
 
         <main className="product-list">
           <div className="all-sarees-header">
-            <h2>WOMEN'S SAREES</h2>
+            <h2>KIDS PRODUCTS</h2>
             <p>SHOWING {filteredProducts.length} RESULTS</p>
           </div>
 
@@ -165,7 +171,7 @@ function Womenproduct() {
               <div className="no-results">
                 <p>No products match your filters</p>
                 <button onClick={() => {
-                  setSelectedSareeType('All');
+                  setSelectedType('All');
                   setSelectedColor('All');
                   setPriceRange([0, 20000]);
                 }}>
@@ -177,7 +183,9 @@ function Womenproduct() {
         </main>
       </div>
     </div>
+    <Footer />
+    </div>
   );
 }
 
-export default Womenproduct;
+export default KidsProductss;

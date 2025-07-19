@@ -1,6 +1,5 @@
 .carousel-container {
-  width: 85%;
-  margin: 0 auto;
+  
   background: #fff;
 }
 
@@ -9,6 +8,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   
+}
+.title, .desc {
+  text-decoration: none;
 }
 
 
@@ -21,6 +23,8 @@
   border-radius: 8px;
   overflow: hidden;
   position: relative;
+  text-decoration: none; /* <-- added */
+  color: inherit;         /* <-- added */
 }
 
 .badge {

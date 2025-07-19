@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import './Womenproduct.css';
+import './Men.css';
 import { AppContext } from '../../context/AppContext';
 
-function Womenproduct() {
+function Menproduct() {
   const { backendUrl } = useContext(AppContext);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [priceRange, setPriceRange] = useState([0, 20000]);
-  const [selectedSareeType, setSelectedSareeType] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedColor, setSelectedColor] = useState('All');
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(`${backendUrl}/api/products?gender=Female`);
+        const res = await fetch(`${backendUrl}/api/products?gender=Male`);
         const data = await res.json();
         if (data.success) {
           setProducts(data.products);
@@ -30,14 +30,13 @@ function Womenproduct() {
     fetchProducts();
   }, [backendUrl]);
 
-  const sareeTypes = [
+  const menCategories = [
     'All',
-    'Cotton',
-    'Silk',
-    'Kancheepuram',
-    'Pattu',
-    'Semi Banarasi',
-    'Short Cotton Sarees'
+    'Shirt',
+    'Tshirt',
+    'Pant',
+    'Sleeveless',
+    'Others'
   ];
 
   const availableColors = ['All', ...new Set(
@@ -48,14 +47,14 @@ function Womenproduct() {
 
   const filteredProducts = products.filter(product => {
     const priceInRange = product.price >= priceRange[0] && product.price <= priceRange[1];
-    
-    const sareeTypeMatch = selectedSareeType === 'All' || 
-      product.category.toLowerCase().trim() === selectedSareeType.toLowerCase().trim();
+
+    const categoryMatch = selectedCategory === 'All' || 
+      product.category.toLowerCase().trim() === selectedCategory.toLowerCase().trim();
 
     const colorMatch = selectedColor === 'All' || 
       (product.variants || []).some(v => v.color === selectedColor);
 
-    return priceInRange && sareeTypeMatch && colorMatch;
+    return priceInRange && categoryMatch && colorMatch;
   });
 
   if (loading) {
@@ -66,22 +65,22 @@ function Womenproduct() {
     <div className="page-container">
       <header className="banner">
         <div className="banner-text">
-          <p>DON'T MISS</p>
-          <h2>UP TO 70%<br />BEST SILK SAREES</h2>
-          <button>LEARN MORE</button>
+          <p>MEN'S COLLECTION</p>
+          <h2>UP TO 50% OFF<br />TRENDY MEN'S WEAR</h2>
+          <button>EXPLORE NOW</button>
         </div>
       </header>
 
       <div className="main-content">
         <aside className="sidebar">
           <div className="categories">
-            <h4>TYPES OF SAREES</h4>
+            <h4>MEN'S CATEGORIES</h4>
             <ul>
-              {sareeTypes.map(type => (
+              {menCategories.map(type => (
                 <li 
                   key={type}
-                  className={selectedSareeType === type ? 'active' : ''}
-                  onClick={() => setSelectedSareeType(type)}
+                  className={selectedCategory === type ? 'active' : ''}
+                  onClick={() => setSelectedCategory(type)}
                 >
                   {type.toUpperCase()}
                 </li>
@@ -131,8 +130,8 @@ function Womenproduct() {
         </aside>
 
         <main className="product-list">
-          <div className="all-sarees-header">
-            <h2>WOMEN'S SAREES</h2>
+          <div className="all-products-header">
+            <h2>MEN'S PRODUCTS</h2>
             <p>SHOWING {filteredProducts.length} RESULTS</p>
           </div>
 
@@ -165,7 +164,7 @@ function Womenproduct() {
               <div className="no-results">
                 <p>No products match your filters</p>
                 <button onClick={() => {
-                  setSelectedSareeType('All');
+                  setSelectedCategory('All');
                   setSelectedColor('All');
                   setPriceRange([0, 20000]);
                 }}>
@@ -180,4 +179,4 @@ function Womenproduct() {
   );
 }
 
-export default Womenproduct;
+export default Menproduct;

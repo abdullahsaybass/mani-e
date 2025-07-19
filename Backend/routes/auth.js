@@ -1,14 +1,25 @@
-// routes/authRoutes.js
 import express from 'express';
-import { register, login, logout, isAuthenticated, resetPassword, sendResetPasswordEmail } from '../controller/authController.js';
+import {
+  register,
+  login,
+  logout,
+  isAuthenticated as authCheck,
+  sendResetPasswordEmail,
+  resetPassword,
+} from '../controller/authController.js';
 
 const router = express.Router();
 
-router.post('/register', register);
-router.post('/login', login);
-router.post('/logout', logout);
-router.post('/authenticated', isAuthenticated);
-router.post('/forgot-password', sendResetPasswordEmail); // ✅ THIS LINE IS NEEDED
-router.put('/reset-password/:token', resetPassword);     // ✅ This too
+// ✅ Auth routes
+router.post('/register', register);               // Register user
+router.post('/login', login);                     // Login user
+router.post('/logout', logout);                   // Logout user
+
+// ✅ THIS IS THE CRITICAL LINE (must be GET for session check on refresh)
+router.get('/authenticated', authCheck);          // Check auth status
+
+// ✅ Password reset routes
+router.post('/forgot-password', sendResetPasswordEmail);
+router.put('/reset-password/:token', resetPassword);
 
 export default router;

@@ -52,6 +52,9 @@ import samudrika from './samudrika.jpg';
 import subs from './subs.jpg';
 import swarovski from './swarovski.png';
 import swarovski1 from './swarovski1.png';
+import elite from './elite.jpg';
+import elite1 from './elite1.png';
+import parampara1 from './parampara1.png';
 
 export const assets = {
     cottonsaree,
@@ -107,7 +110,10 @@ export const assets = {
     samudrika,
     subs,
     swarovski,
-    swarovski1
+    swarovski1,
+    elite,
+    elite1,
+    parampara1
 }
 
 export const products = [

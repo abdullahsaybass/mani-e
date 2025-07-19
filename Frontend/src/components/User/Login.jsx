@@ -1,7 +1,7 @@
-// src/components/User/LoginForm.jsx
+// src/pages/Auth/LoginForm.jsx
 
 import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import './Login.css';
 import { FcGoogle } from 'react-icons/fc';
 import { BiLogoFacebookCircle } from "react-icons/bi";
@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { backendUrl, setIsLoggedIn, setUserData } = useContext(AppContext);
 
   const [email, setEmail] = useState('');
@@ -28,7 +29,7 @@ const LoginForm = () => {
 
     setLoading(true);
     try {
-      // 1. login request
+      // ✅ Step 1: login
       const res = await fetch(`${backendUrl}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -36,14 +37,14 @@ const LoginForm = () => {
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      if (!res.ok || data.success === 'false') {
+      if (!res.ok || data.success === false) {
         throw new Error(data.message || "Login failed");
       }
       toast.success("Login successful!");
 
-      // 2. fetch authenticated user
+      // ✅ Step 2: confirm user is authenticated (MUST be GET)
       const authRes = await fetch(`${backendUrl}/api/auth/authenticated`, {
-        method: 'POST',
+        method: 'GET',
         credentials: 'include',
       });
       const authData = await authRes.json();
@@ -52,8 +53,15 @@ const LoginForm = () => {
         setUserData(authData.user);
       }
 
-      // 3. redirect home
-      navigate('/');
+      // ✅ Step 3: redirect to last path or home
+      const returnTo = localStorage.getItem("returnTo");
+      if (returnTo) {
+        localStorage.removeItem("returnTo");
+        navigate(returnTo);
+      } else {
+        navigate("/");
+      }
+
     } catch (err) {
       console.error("Login error:", err);
       toast.error(err.message);

@@ -109,14 +109,26 @@ export const updateProduct = async (req, res) => {
 };
 
 // GET ALL PRODUCTS
+// GET ALL PRODUCTS (with gender/category filtering)
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const filter = {};
+
+    if (req.query.gender) {
+      filter.gender = req.query.gender;
+    }
+
+    if (req.query.category) {
+      filter.category = req.query.category;
+    }
+
+    const products = await Product.find(filter);
     res.json({ success: true, products });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
 };
+
 
 // GET SINGLE PRODUCT
 export const getSingleProduct = async (req, res) => {

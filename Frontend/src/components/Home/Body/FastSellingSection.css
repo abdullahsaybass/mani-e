@@ -9,18 +9,21 @@
   text-align: center;
   margin-bottom: 40px;
 }
+
 .sub-title {
   font-size: 14px;
   letter-spacing: 2px;
   color: #666;
   margin-bottom: 10px;
 }
+
 .main-title {
   font-size: 36px;
   font-weight: 700;
   margin: 0;
   color: #222;
 }
+
 .underline {
   width: 50px;
   height: 3px;
@@ -28,59 +31,70 @@
   margin: 12px auto 0;
 }
 
-/* Hide old grid, use slider instead */
-.products-grid {
-  display: none;
+/* Product slider wrapper */
+.product-slider-wrapper {
+  
+  padding: 20px 10px 10px;
 }
 
-/* Slider slide padding */
-.product-slider .slick-slide {
-  padding: 0 8px;
+/* Add thin light gray border ONLY between sections */
+.product-slider-wrapper.with-border {
+  border-top: 1px solid #eee;
 }
 
-/* Card */
-.product-card {
-  background: #fff;
+/* Product slide styling */
+.product-item {
+  padding: 10px 16px;
   text-align: center;
-  padding: 20px 10px;
+  border-right: 1px solid #ddd;
   position: relative;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  height: 100%;
-  box-sizing: border-box;
 }
 
-.discount-badge {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #e00;
-  color: #fff;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 12px;
+.slick-slide:last-child .product-item {
+  border-right: none;
 }
 
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .product-slider .slick-slide:nth-child(3n) .product-item {
+    border-right: none;
+  }
+}
+@media (max-width: 768px) {
+  .product-slider .slick-slide:nth-child(2n) .product-item {
+    border-right: none;
+  }
+}
+@media (max-width: 480px) {
+  .product-slider .slick-slide:nth-child(1n) .product-item {
+    border-right: none;
+  }
+}
+
+/* Product image */
 .product-image {
   max-width: 100px;
-  height: auto;
   margin: 0 auto 16px;
   display: block;
 }
 
+/* Category label */
 .category-label {
   font-size: 12px;
   color: #c8cf1f;
   text-transform: uppercase;
   margin: 8px 0 4px;
 }
+
+/* Product name */
 .product-name {
   font-size: 14px;
   font-weight: 600;
   color: #222;
   margin: 0 0 8px;
 }
+
+/* Price section */
 .price {
   font-size: 14px;
   margin: 0;
@@ -96,6 +110,21 @@
   font-size: 12px;
 }
 
+/* Discount badge */
+.discount-badged {
+  position: absolute;
+  top:-20px;
+  left: 30%;
+  transform: translateX(-50%);
+  background-color: #e00;
+  color: #fff;
+  font-size: 8px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: none;
+}
+
+/* Footer CTA */
 .footer-button {
   text-align: center;
   margin-top: 40px;
@@ -114,13 +143,8 @@
   opacity: 0.9;
 }
 
-/* Override slick default arrow colors */
+/* Slick arrows */
 .slick-prev:before,
 .slick-next:before {
   color: #333;
-}
-
-/* Remove extra margin on last slide */
-.product-slider .slick-slide:last-child {
-  padding-right: 0;
 }

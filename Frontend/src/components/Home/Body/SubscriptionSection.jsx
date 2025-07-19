@@ -1,24 +1,26 @@
-// SubscriptionSection.jsx
 import React from 'react';
 import './SubscriptionSection.css';
+import { assets } from '../../../assets/assets';
 
 const SubscriptionSection = () => (
   <section className="subscription-section">
     <div className="container">
+      {/* Image First */}
       <div className="image-wrapper">
         <img
-          src="/images/subscription-saree.jpg"
+          src={assets.subs}
           alt="Subscription Offer"
           className="subscription-image"
         />
       </div>
 
+      {/* Text + Form */}
       <div className="content-wrapper">
         <p className="sub-title">SPECIAL OFFERS FOR SUBSCRIBERS</p>
         <h2 className="main-title">
-          NEW OFFERS EVERY WEEK <span className="highlight">+ DISCOUNT</span>
+          NEW OFFERS EVERY WEEK + DISCOUNT
           <br />
-          OFF FROM <span className="highlight">20%</span>+ BEST HOT PRICES
+          OFF FROM 20% + BEST HOT PRICES
         </h2>
         <p className="description">
           Join our subscriber list and unlock exclusive discounts, early access
@@ -26,16 +28,18 @@ const SubscriptionSection = () => (
           community.
         </p>
 
-        <form className="subscription-form" onSubmit={e => e.preventDefault()}>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="email-input"
-          />
-          <button type="submit" className="submit-btn">
-            SUBMIT
-          </button>
-        </form>
+        <div className="form-wrapper">
+          <form className="subscription-form" onSubmit={e => e.preventDefault()}>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="subscription-input"
+            />
+            <button type="submit" className="submit-btnsww">
+              SUBMIT
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </section>
